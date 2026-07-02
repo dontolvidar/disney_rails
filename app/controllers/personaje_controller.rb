@@ -3,11 +3,16 @@ class PersonajeController < ApplicationController
         render json: Personaje.all
     end
     def create
-	    personaje=Personaje.new(nombre: 'Mickey', edad: 50, peso: 69.2, historia: 'a golden globe candidate', imagen: 'http://imagen.com/Mickey')
+	    personaje=Personaje.new(personaje_parametros)
         if personaje.save
             render json:personaje, status: :created
         else
             render json:personaje.errors, status: :unproccessable_entity
         end
+    end
+    
+    private
+    def personaje_parametros
+        params.require(:personaje).permit(:nombre,:edad,:peso,:historia,:imagen)
     end
 end
