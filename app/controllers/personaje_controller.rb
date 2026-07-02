@@ -7,7 +7,7 @@ class PersonajeController < ApplicationController
         if personaje.save
             render json:personaje, status: :created
         else
-            render json:personaje.errors, status: :unproccessable_entity
+            render json:personaje.errors, status: :unprocessable_entity
         end
     end
     
