@@ -11,6 +11,12 @@ class PersonajeController < ApplicationController
         end
     end
     
+    def destroy
+        Personaje.find(params[:id]).destroy!
+        head :no_content
+    end
+
+
     private
     def personaje_parametros
         params.require(:personaje).permit(:nombre,:edad,:peso,:historia,:imagen)
