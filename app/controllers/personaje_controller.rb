@@ -1,4 +1,5 @@
-class PersonajeController < ApplicationController
+class PersonajeController < ApplicationController+
+
     def index
         render json: Personaje.all
     end
@@ -21,4 +22,6 @@ class PersonajeController < ApplicationController
     def personaje_parametros
         params.require(:personaje).permit(:nombre,:edad,:peso,:historia,:imagen)
     end
+
+   
 end
