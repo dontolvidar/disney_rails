@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_03_133020) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_03_134701) do
   create_table "generos", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "imagen"
     t.string "nombre"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "pelicula_generos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "genero_id", null: false
+    t.integer "pelicula_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genero_id"], name: "index_pelicula_generos_on_genero_id"
+    t.index ["pelicula_id"], name: "index_pelicula_generos_on_pelicula_id"
   end
 
   create_table "peliculas", force: :cascade do |t|
@@ -37,4 +46,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_03_133020) do
     t.float "peso"
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "pelicula_generos", "generos"
+  add_foreign_key "pelicula_generos", "peliculas"
 end
