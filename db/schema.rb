@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_02_174027) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_03_133020) do
+  create_table "generos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "imagen"
+    t.string "nombre"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "peliculas", force: :cascade do |t|
+    t.integer "calificacion"
+    t.datetime "created_at", null: false
+    t.integer "edad"
+    t.date "fecha_calificacion"
+    t.string "imagen"
+    t.string "titulo"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "personajes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "edad"
