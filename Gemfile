@@ -1,5 +1,8 @@
 source "https://rubygems.org"
 
+#auth jwt
+gem "jwt"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.1.3"
 # Use sqlite3 as the database for Active Record
