@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_03_134701) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_03_135006) do
   create_table "generos", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "imagen"
@@ -25,6 +25,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_03_134701) do
     t.datetime "updated_at", null: false
     t.index ["genero_id"], name: "index_pelicula_generos_on_genero_id"
     t.index ["pelicula_id"], name: "index_pelicula_generos_on_pelicula_id"
+  end
+
+  create_table "pelicula_personajes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "pelicula_id", null: false
+    t.integer "personaje_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pelicula_id"], name: "index_pelicula_personajes_on_pelicula_id"
+    t.index ["personaje_id"], name: "index_pelicula_personajes_on_personaje_id"
   end
 
   create_table "peliculas", force: :cascade do |t|
@@ -49,4 +58,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_03_134701) do
 
   add_foreign_key "pelicula_generos", "generos"
   add_foreign_key "pelicula_generos", "peliculas"
+  add_foreign_key "pelicula_personajes", "peliculas"
+  add_foreign_key "pelicula_personajes", "personajes"
 end
