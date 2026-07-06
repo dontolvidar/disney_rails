@@ -7,6 +7,18 @@ class PeliculaController < ApplicationController
 
     def index
         peliculas = Pelicula.all
+        peliculas = peliculas.where(titulo: params[:titulo]) if params[:titulo].present?
+        
+
+        order = params[:order]&.downcase
+        if order.in?(%w[asc desc])
+            peliculas = peliculas.order(fecha_calificacion: order)
+            
+        end
+        
+        if params[:generos].present?
+            peliculas = peliculas.joins(:generos).where(generos: { id: params[:generos] })
+        end
         render json: PeliculaRepresenter.new(peliculas).as_json_sin_calificacion, status: :ok
     end
 
