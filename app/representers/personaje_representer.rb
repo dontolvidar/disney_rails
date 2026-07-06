@@ -6,7 +6,6 @@ class PersonajeRepresenter
     def as_json
         @personajes.map do |personaje|
             {
-                id: personaje.id,
                 nombre: personaje.nombre,
                 edad: personaje.edad,
                 peso: personaje.peso,

@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   post 'auth', to: 'auth#create'
   # Defines the root path route ("/")
   # root "posts#index"
+
 end

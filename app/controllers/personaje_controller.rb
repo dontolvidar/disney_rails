@@ -5,7 +5,12 @@ class PersonajeController < ApplicationController
 
     def index
        personajes=Personaje.all
-       render json: PersonajeRepresenter.new(personajes).as_json_nombre_imagen, status: :ok
+       personajes = personajes.where(nombre: params[:name]) if params[:name].present?
+        personajes = personajes.where(edad: params[:age]) if params[:age].present?
+        if params[:movies].present?
+            personajes = personajes.joins(:peliculas).where(peliculas: { id: params[:movies] })
+        end
+       render json: PersonajeRepresenter.new(personajes).as_json, status: :ok
     end
 
     def create
@@ -41,6 +46,9 @@ class PersonajeController < ApplicationController
         Personaje.find(params[:id]).destroy!
         head :no_content
     end
+
+
+    
 
 
     private
