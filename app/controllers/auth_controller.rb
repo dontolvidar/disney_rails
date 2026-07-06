@@ -20,7 +20,7 @@ class AuthController < ApplicationController
         render json: {errores:e.record.errors} , status: :unprocessable_entity
     end
 
-    def handle_authenticated(e)
-        head: unauthorized
+    def handle_authenticated
+        head :unauthorized
     end
 end
