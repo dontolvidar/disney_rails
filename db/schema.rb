@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_03_135006) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_03_181717) do
   create_table "generos", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "imagen"
@@ -54,6 +54,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_03_135006) do
     t.string "nombre"
     t.float "peso"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "password_digest"
+    t.datetime "updated_at", null: false
+    t.string "username"
   end
 
   add_foreign_key "pelicula_generos", "generos"
