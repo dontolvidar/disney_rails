@@ -1,7 +1,7 @@
 class PeliculaController < ApplicationController
     
         include ActionController::HttpAuthentication::Token
-        before_action :authenticate_user, only: [:index,:show]
+        before_action :authenticate_user, only: [:index,:show,:create,:update,:destroy]
 
 
 
@@ -18,6 +18,28 @@ class PeliculaController < ApplicationController
         pelicula: pelicula,
         personajes: PersonajeRepresenter.new(personajes).as_json_nombre
         }, status: :ok
+    end
+    def update
+        pelicula = Pelicula.find(params[:id])
+        if pelicula.update(pelicula_parametros)
+            render json: pelicula, status: :ok
+        else
+            render json: pelicula.errors, status: :unprocessable_entity
+        end
+    end
+    def destroy
+        Pelicula.find(params[:id]).destroy!
+        head :no_content
+    end
+    
+
+    def create
+	    pelicula=Pelicula.new(pelicula_parametros)
+        if pelicula.save
+            render json:pelicula, status: :created
+        else
+            render json:pelicula.errors, status: :unprocessable_entity
+        end
     end
 
     private
