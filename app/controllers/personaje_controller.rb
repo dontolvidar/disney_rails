@@ -1,7 +1,7 @@
 class PersonajeController < ApplicationController
     
         include ActionController::HttpAuthentication::Token
-        before_action :authenticate_user, only: [:index,:create, :destroy, :update]
+        before_action :authenticate_user, only: [:index,:create, :destroy, :update, :show]
 
     def index
        personajes=Personaje.all
@@ -16,6 +16,17 @@ class PersonajeController < ApplicationController
             render json:personaje.errors, status: :unprocessable_entity
         end
     end
+    
+    def show
+        personaje = Personaje.find(params[:id])
+        peliculas = personaje.peliculas
+
+        render json: {
+        personaje: personaje,
+        peliculas: PeliculaRepresenter.new(peliculas).as_json
+        }, status: :ok
+    end
+
 
     def update
         personaje = Personaje.find(params[:id])

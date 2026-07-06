@@ -25,6 +25,7 @@ class PersonajeRepresenter
         end
     end
 
+
     private
     attr_reader :personajes
 end
