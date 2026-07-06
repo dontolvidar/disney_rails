@@ -13,4 +13,14 @@ class PeliculaRepresenter
             }
         end
     end
+
+    def as_json_sin_calificacion
+        @peliculas.map do |pelicula|
+            {
+                titulo: pelicula.titulo,
+                fecha_calificacion: pelicula.fecha_calificacion,
+                imagen: pelicula.imagen
+            }
+        end
+    end
 end
