@@ -1,18 +1,28 @@
 class PersonajeController < ApplicationController
     
         include ActionController::HttpAuthentication::Token
-        before_action :authenticate_user, only: [:create, :destroy]
+        before_action :authenticate_user, only: [:index,:create, :destroy, :update]
 
     def index
        personajes=Personaje.all
        render json: PersonajeRepresenter.new(personajes).as_json_nombre_imagen, status: :ok
     end
+
     def create
 	    personaje=Personaje.new(personaje_parametros)
         if personaje.save
             render json:personaje, status: :created
         else
             render json:personaje.errors, status: :unprocessable_entity
+        end
+    end
+
+    def update
+        personaje = Personaje.find(params[:id])
+        if personaje.update(personaje_parametros)
+            render json: personaje, status: :ok
+        else
+            render json: personaje.errors, status: :unprocessable_entity
         end
     end
     
