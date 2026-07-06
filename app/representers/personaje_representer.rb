@@ -3,6 +3,14 @@ class PersonajeRepresenter
         @personajes = personajes
     end
 
+    def as_json_nombre
+        @personajes.map do |personaje|
+            {
+                nombre: personaje.nombre
+            }
+        end
+    end
+
     def as_json
         @personajes.map do |personaje|
             {
