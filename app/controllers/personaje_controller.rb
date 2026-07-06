@@ -4,7 +4,8 @@ class PersonajeController < ApplicationController
         before_action :authenticate_user, only: [:create, :destroy]
 
     def index
-        render json: Personaje.all
+       personajes=Personaje.all
+       render json: PersonajeRepresenter.new(personajes).as_json_nombre_imagen, status: :ok
     end
     def create
 	    personaje=Personaje.new(personaje_parametros)
