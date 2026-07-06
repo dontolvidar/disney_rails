@@ -11,6 +11,8 @@ class AuthController < ApplicationController
 
         render json: {token: token}, status: :created
     end
+
+    
     private
     def user
         @user ||= User.find_by(username: params.require(:username))
