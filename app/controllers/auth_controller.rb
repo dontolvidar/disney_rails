@@ -24,14 +24,16 @@ class AuthController < ApplicationController
     
     
     def create
-        user = User.new(username: params.require(:username), password: params.require(:password))
+        user = User.new(username: params.require(:username), password: params.require(:password), email: params.require(:email))
         if User.exists?(username: user.username)
+            
             render json: {errores:"El usuario ya existe"} , status: :unprocessable_entity
+
             return
         else
             active_record = user.save
             if active_record
-            
+            UserNotifierMailer.send_signup_email(user).deliver_now
             token= AuthTokenService.call (user.id)
             render json: {creado:"El usuario se ha creado correctamente"} , status: :created
             else
